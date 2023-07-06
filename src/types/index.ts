@@ -19,3 +19,14 @@ type EndpointsProps = {
 export type ENDPOINTS_MAP = {
   [key in ROUTE_NAME]: (props: EndpointsProps) => Promise<AxiosResponse<any>>;
 };
+
+export type SpreadsheetsItem = {
+  properties: {
+    title: string;
+  }
+}
+
+export type Spreadsheets = {
+ sheets: SpreadsheetsItem[],
+ spreadsheetId: string;
+};

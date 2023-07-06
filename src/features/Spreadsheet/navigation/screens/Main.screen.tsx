@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import endpoints from "../../../../endpoints";
 import { ActivityIndicator, FlatList } from "react-native";
 import { ListItem } from "../../../../components/ListItem";
 import { RStyleSheet } from "../../../../components/Stylesheet";
 import { COLORS } from "../../../../constants/colors";
+import { ROUTES } from "../../../../constants/routes";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types";
+import { Spreadsheets } from "../../../../types";
 
-export const MainScreen = () => {
-  const [sheetsData, getSheets] = useState(null);
+export const MainScreen: FC<
+  NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_MAIN">
+> = ({ navigation }) => {
+  const [sheetsData, getSheets] = useState<null | Spreadsheets>(null);
   useEffect(() => {
     const func = async () => {
       try {
@@ -16,7 +22,7 @@ export const MainScreen = () => {
           },
         });
 
-        getSheets(result.data);
+        getSheets(result.data as Spreadsheets);
       } catch (error) {
         console.error(error);
       }
@@ -29,10 +35,18 @@ export const MainScreen = () => {
       style={styles.wrapper}
       data={sheetsData?.sheets}
       keyExtractor={({ properties: { title } }) => title}
-      renderItem={({ item: { properties: { title } = {} } }) => (
-        <ListItem text={title} />
+      renderItem={({ item: { properties: { title } } }) => (
+        <ListItem
+          text={title}
+          onPress={() =>
+            navigation.navigate(ROUTES.SPREADSHEETS.SHEET, {
+              title,
+              sheetId: sheetsData?.spreadsheetId,
+            })
+          }
+        />
       )}
-      ListEmptyComponent={!sheetsData && <ActivityIndicator />}
+      ListEmptyComponent={() => !sheetsData && <ActivityIndicator />}
     />
   );
 };

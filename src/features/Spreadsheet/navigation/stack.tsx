@@ -1,11 +1,20 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MainScreen } from "./screens/Main.screen";
+import { ROUTES } from "../../../constants/routes";
+import { SheetScreen } from "./screens/Sheet.screen";
+import { RootStackParamList } from "./types";
+import { TRANSLATIONS } from "../../../constants/translations";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const SpreadSheetStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="Home" component={MainScreen} />
+  <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+    <Stack.Screen name={ROUTES.SPREADSHEETS.MAIN} component={MainScreen} options={{
+      title: TRANSLATIONS.SPREADSHEET_MAIN
+    }} />
+    <Stack.Screen name={ROUTES.SPREADSHEETS.SHEET} component={SheetScreen} options={({ route }) => ({
+      title: route.params.title
+    })} />
   </Stack.Navigator>
 );
