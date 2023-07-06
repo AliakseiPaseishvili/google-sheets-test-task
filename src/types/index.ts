@@ -1,6 +1,11 @@
 import { AxiosResponse } from "axios";
+import { SetStateAction } from "react";
 
-export type ROUTE_NAME = "getSheet";
+export enum RequestTypes { GET_SHEET = 'getSheet',
+GET_SHEET_DATA = 'getSheetData',
+}
+
+export type ROUTE_NAME = RequestTypes.GET_SHEET | RequestTypes.GET_SHEET_DATA;
 export type METHOD = "get";
 
 export type ROUTE_MAP = {
@@ -13,11 +18,8 @@ export type ROUTE_MAP = {
 type EndpointsProps = {
   urlKeys: {
     sheetId: string;
+    sheetName?: string;
   };
-};
-
-export type ENDPOINTS_MAP = {
-  [key in ROUTE_NAME]: (props: EndpointsProps) => Promise<AxiosResponse<any>>;
 };
 
 export type SpreadsheetsItem = {
@@ -29,4 +31,14 @@ export type SpreadsheetsItem = {
 export type Spreadsheets = {
  sheets: SpreadsheetsItem[],
  spreadsheetId: string;
+};
+
+
+export type SheetData = {
+  values: string[][]
+};
+
+export type ENDPOINTS_MAP = {
+  [RequestTypes.GET_SHEET]: (props: EndpointsProps) => Promise<AxiosResponse<SetStateAction<Spreadsheets | null>>>;
+  [RequestTypes.GET_SHEET_DATA]: (props: EndpointsProps) => Promise<AxiosResponse<SheetData>>;
 };

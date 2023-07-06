@@ -10,11 +10,19 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const SpreadSheetStack = () => (
   <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
-    <Stack.Screen name={ROUTES.SPREADSHEETS.MAIN} component={MainScreen} options={{
-      title: TRANSLATIONS.SPREADSHEET_MAIN
-    }} />
-    <Stack.Screen name={ROUTES.SPREADSHEETS.SHEET} component={SheetScreen} options={({ route }) => ({
-      title: route.params.title
-    })} />
+    <Stack.Screen
+      name={ROUTES.SPREADSHEETS.MAIN}
+      component={MainScreen}
+      options={{
+        title: TRANSLATIONS.SPREADSHEET_MAIN,
+      }}
+    />
+    <Stack.Screen
+      name={ROUTES.SPREADSHEETS.SHEET}
+      component={SheetScreen}
+      options={({ route }) => ({
+        title: route.params.title,
+      })}
+    />
   </Stack.Navigator>
 );

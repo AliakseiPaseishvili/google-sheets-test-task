@@ -22,7 +22,7 @@ export const MainScreen: FC<
           },
         });
 
-        getSheets(result.data as Spreadsheets);
+        getSheets(result.data);
       } catch (error) {
         console.error(error);
       }
