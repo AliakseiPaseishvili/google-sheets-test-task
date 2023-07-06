@@ -9,10 +9,14 @@ export type RowProps = {
 };
 
 export const Row: FC<RowProps> = ({ data, arrayLength }) => {
-  const rowData = useMemo(
-    () => [...data, ...new Array(arrayLength - data.length).fill("")],
-    [data, arrayLength]
-  );
+  const rowData = useMemo(() => {
+    const arrayDiff = arrayLength - data.length;
+    if (arrayDiff) {
+      return [...data, ...new Array(arrayLength - data.length).fill("")];
+    } else {
+      return data;
+    }
+  }, [data, arrayLength]);
   return (
     <RNRow
       data={rowData}

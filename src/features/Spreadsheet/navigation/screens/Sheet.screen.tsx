@@ -25,7 +25,6 @@ export const SheetScreen: FC<
               sheetName: title,
             },
           });
-
           setSheetData(result.data.values);
         }
       } catch (error) {
@@ -44,8 +43,12 @@ export const SheetScreen: FC<
     <ScrollView horizontal={true} style={styles.wrapper}>
       <FlatList
         data={sheetData}
+        keyExtractor={(item, index) =>
+          item.reduce((finalSting: string, string: string) => finalSting + string, "") + index
+        }
         renderItem={({ item }) => <Row data={item} arrayLength={arrayLength} />}
         ListEmptyComponent={() => !sheetData && <ActivityIndicator />}
+        initialNumToRender={18}
       />
     </ScrollView>
   );
