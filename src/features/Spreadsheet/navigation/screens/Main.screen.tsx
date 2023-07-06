@@ -8,6 +8,7 @@ import { ROUTES } from "../../../../constants/routes";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import { Spreadsheets } from "../../../../types";
+import { GOOGLE_SHEET_ID } from "../../../../constants/googlesheet";
 
 export const MainScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_MAIN">
@@ -18,7 +19,7 @@ export const MainScreen: FC<
       try {
         const result = await endpoints.getSheet({
           urlKeys: {
-            sheetId: "17FXJ_St91eMQ7Fc3zO4YMMhfzixG5g2wq0a3Mk77XsE",
+            sheetId: GOOGLE_SHEET_ID,
           },
         });
 
@@ -35,7 +36,11 @@ export const MainScreen: FC<
       style={styles.wrapper}
       data={sheetsData?.sheets}
       keyExtractor={({ properties: { title } }) => title}
-      renderItem={({ item: { properties: { title } } }) => (
+      renderItem={({
+        item: {
+          properties: { title },
+        },
+      }) => (
         <ListItem
           text={title}
           onPress={() =>
