@@ -41,3 +41,8 @@ export type ENDPOINTS_MAP = {
   [RequestTypes.GET_SHEET]: (props: EndpointsProps) => Promise<AxiosResponse<Spreadsheets>>;
   [RequestTypes.GET_SHEET_DATA]: (props: EndpointsProps) => Promise<AxiosResponse<SheetData>>;
 };
+
+export interface SheetFullData extends SheetData {
+  title: string;
+  arrayLength: number;
+};
