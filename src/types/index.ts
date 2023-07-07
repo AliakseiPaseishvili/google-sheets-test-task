@@ -28,17 +28,16 @@ export type SpreadsheetsItem = {
   }
 }
 
-export type Spreadsheets = {
+export interface Spreadsheets {
  sheets: SpreadsheetsItem[],
  spreadsheetId: string;
-};
-
+}
 
 export type SheetData = {
   values: string[][]
 };
 
 export type ENDPOINTS_MAP = {
-  [RequestTypes.GET_SHEET]: (props: EndpointsProps) => Promise<AxiosResponse<SetStateAction<Spreadsheets | null>>>;
+  [RequestTypes.GET_SHEET]: (props: EndpointsProps) => Promise<AxiosResponse<Spreadsheets>>;
   [RequestTypes.GET_SHEET_DATA]: (props: EndpointsProps) => Promise<AxiosResponse<SheetData>>;
 };

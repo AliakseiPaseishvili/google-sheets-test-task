@@ -1,11 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Row } from "../../components/Row";
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useState, useRef } from "react";
 import { RootStackParamList } from "../types";
 import endpoints from "../../../../endpoints";
 import { ActivityIndicator, FlatList, ScrollView } from "react-native";
 import { RStyleSheet } from "../../../../components/Stylesheet";
 import { COLORS } from "../../../../constants/colors";
+import { GOOGLE_SHEET_ID } from "../../../../constants/googlesheet";
+import { API_KEY } from "@env";
 
 export const SheetScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_SHEET">
@@ -14,6 +16,7 @@ export const SheetScreen: FC<
     params: { title, sheetId },
   },
 }) => {
+
   const [sheetData, setSheetData] = useState<string[][]>([]);
   useEffect(() => {
     const func = async () => {
@@ -44,7 +47,10 @@ export const SheetScreen: FC<
       <FlatList
         data={sheetData}
         keyExtractor={(item, index) =>
-          item.reduce((finalSting: string, string: string) => finalSting + string, "") + index
+          item.reduce(
+            (finalSting: string, string: string) => finalSting + string,
+            ""
+          ) + index
         }
         renderItem={({ item }) => <Row data={item} arrayLength={arrayLength} />}
         ListEmptyComponent={() => !sheetData && <ActivityIndicator />}

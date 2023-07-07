@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
-import endpoints from "../../../../endpoints";
+import React, { FC } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import { ListItem } from "../../../../components/ListItem";
 import { RStyleSheet } from "../../../../components/Stylesheet";
@@ -7,34 +6,18 @@ import { COLORS } from "../../../../constants/colors";
 import { ROUTES } from "../../../../constants/routes";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
-import { Spreadsheets } from "../../../../types";
-import { GOOGLE_SHEET_ID } from "../../../../constants/googlesheet";
+import { useGetSpreadsheetData } from "../../hooks/useGetSpreadsheetData";
 
 export const MainScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_MAIN">
 > = ({ navigation }) => {
-  const [sheetsData, getSheets] = useState<null | Spreadsheets>(null);
-  useEffect(() => {
-    const func = async () => {
-      try {
-        const result = await endpoints.getSheet({
-          urlKeys: {
-            sheetId: GOOGLE_SHEET_ID,
-          },
-        });
 
-        getSheets(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    func();
-  }, []);
+  const { spreadsheetId, sheets } = useGetSpreadsheetData();
 
   return (
     <FlatList
       style={styles.wrapper}
-      data={sheetsData?.sheets}
+      data={sheets}
       keyExtractor={({ properties: { title } }) => title}
       renderItem={({
         item: {
@@ -46,12 +29,12 @@ export const MainScreen: FC<
           onPress={() =>
             navigation.navigate(ROUTES.SPREADSHEETS.SHEET, {
               title,
-              sheetId: sheetsData?.spreadsheetId,
+              sheetId: spreadsheetId,
             })
           }
         />
       )}
-      ListEmptyComponent={() => !sheetsData && <ActivityIndicator />}
+      ListEmptyComponent={() => !sheets.length && <ActivityIndicator />}
     />
   );
 };
