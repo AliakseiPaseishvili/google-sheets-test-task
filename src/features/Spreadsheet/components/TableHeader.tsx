@@ -6,6 +6,9 @@ import { TRANSLATIONS } from "../../../constants/translations";
 import { View } from "react-native";
 import { RootState } from "../../../store";
 import { shallowEqual, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTES } from "../../../constants/routes";
+import { RootStackParamList } from "../navigation/types";
 
 interface TableHeaderProps {
   title: string;
@@ -16,19 +19,20 @@ const mapStateToProps = (title: string) => (store: RootState) => {
 
   const { arrayLength } = sheet[title] || {};
 
-  
-
-  return arrayLength ? new Array(arrayLength).fill('').map((_,index)=> index) : [];
+  return arrayLength
+    ? new Array(arrayLength).fill("").map((_, index) => index)
+    : [];
 };
 
 export const TableHeader: FC<TableHeaderProps> = ({ title }) => {
-  const headerArray  = useSelector(mapStateToProps(title), shallowEqual);
-
+  const headerArray = useSelector(mapStateToProps(title), shallowEqual);
+  const navigation = useNavigation();
   return (
     <View style={styles.rowStyle}>
       {headerArray.map((item) => (
         <View style={styles.cell} key={item}>
           <Button
+            onPress={() => navigation.navigate(ROUTES.SPREADSHEETS.PIE)}
             style={styles.button}
             textStyle={styles.buttonText}
             text={TRANSLATIONS.SHEET_SHOW_PIE}

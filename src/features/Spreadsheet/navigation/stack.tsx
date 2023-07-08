@@ -5,6 +5,7 @@ import { ROUTES } from "../../../constants/routes";
 import { SheetScreen } from "./screens/Sheet.screen";
 import { RootStackParamList } from "./types";
 import { TRANSLATIONS } from "../../../constants/translations";
+import { CulumnPieScreen } from "./screens/ColumnPie.screen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,5 +25,6 @@ export const SpreadSheetStack = () => (
         title: route.params.title,
       })}
     />
+    <Stack.Screen name={ROUTES.SPREADSHEETS.PIE} component={CulumnPieScreen} />
   </Stack.Navigator>
 );
