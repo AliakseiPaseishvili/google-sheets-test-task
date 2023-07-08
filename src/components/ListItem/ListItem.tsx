@@ -12,7 +12,7 @@ type ListItemProps = {
 export const ListItem: FC<ListItemProps> = ({ onPress, text }) => {
   return (
     <Button style={styles.wrapper} onPress={onPress} disabled={!onPress}>
-      <Text>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
     </Button>
   );
 };
@@ -22,5 +22,8 @@ const styles = RStyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderColor: COLORS.border,
+  },
+  text: {
+    fontSize: 16,
   }
 });

@@ -6,9 +6,10 @@ import { COLORS } from "../../../constants/colors";
 export type RowProps = {
   data: string[];
   arrayLength: number;
+  widthArr: number[],
 };
 
-export const Row: FC<RowProps> = ({ data, arrayLength }) => {
+export const Row: FC<RowProps> = ({ data, arrayLength, widthArr }) => {
   const rowData = useMemo(() => {
     const arrayDiff = arrayLength - data.length;
     if (arrayDiff) {
@@ -20,7 +21,7 @@ export const Row: FC<RowProps> = ({ data, arrayLength }) => {
   return (
     <RNRow
       data={rowData}
-      widthArr={rowData.map(() => 80)}
+      widthArr={widthArr}
       style={styles.rowStyle}
       textStyle={styles.textStyle}
       borderStyle={styles.borderStyle}
@@ -35,6 +36,7 @@ const styles = RStyleSheet.create({
   textStyle: {
     textAlign: "center",
     backgroundColor: "red",
+    fontSize: 14,
   },
   borderStyle: { borderWidth: 1, borderColor: COLORS.border },
 });
