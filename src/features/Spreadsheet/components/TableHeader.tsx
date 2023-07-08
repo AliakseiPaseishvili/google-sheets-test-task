@@ -6,7 +6,7 @@ import { TRANSLATIONS } from "../../../constants/translations";
 import { View } from "react-native";
 import { RootState } from "../../../store";
 import { shallowEqual, useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ROUTES } from "../../../constants/routes";
 import { RootStackParamList } from "../navigation/types";
 
@@ -14,7 +14,7 @@ interface TableHeaderProps {
   title: string;
 }
 
-const mapStateToProps = (title: string) => (store: RootState) => {
+const mapStateToPropsHeaderArray = (title: string) => (store: RootState) => {
   const { sheet } = store;
 
   const { arrayLength } = sheet[title] || {};
@@ -24,19 +24,39 @@ const mapStateToProps = (title: string) => (store: RootState) => {
     : [];
 };
 
+const mapStateToPropsCollumnsMap = (title: string) => (store: RootState) => {
+  const { sheet } = store;
+
+  const { columnsMap } = sheet[title] || {};
+
+  return columnsMap;
+};
+
 export const TableHeader: FC<TableHeaderProps> = ({ title }) => {
-  const headerArray = useSelector(mapStateToProps(title), shallowEqual);
-  const navigation = useNavigation();
+  const headerArray = useSelector(
+    mapStateToPropsHeaderArray(title),
+    shallowEqual
+  );
+  const columnsMap = useSelector(
+    mapStateToPropsCollumnsMap(title),
+    shallowEqual
+  );
+
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.rowStyle}>
-      {headerArray.map((item) => (
-        <View style={styles.cell} key={item}>
-          <Button
-            onPress={() => navigation.navigate(ROUTES.SPREADSHEETS.PIE)}
-            style={styles.button}
-            textStyle={styles.buttonText}
-            text={TRANSLATIONS.SHEET_SHOW_PIE}
-          />
+      {headerArray.map((index) => (
+        <View style={styles.cell} key={`${columnsMap[0]}_${index}`}>
+          {columnsMap[index].length ? (
+            <Button
+              onPress={() =>
+                navigation.navigate(ROUTES.SPREADSHEETS.PIE, { title, index })
+              }
+              style={styles.button}
+              textStyle={styles.buttonText}
+              text={TRANSLATIONS.SHEET_SHOW_PIE}
+            />
+          ) : null}
         </View>
       ))}
     </View>

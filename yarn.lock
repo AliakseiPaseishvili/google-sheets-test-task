@@ -2004,6 +2004,11 @@
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.12.tgz"
   "version" "7.0.12"
 
+"@types/lodash@^4.14.195":
+  "integrity" "sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg=="
+  "resolved" "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.195.tgz"
+  "version" "4.14.195"
+
 "@types/metro-config@^0.76.3":
   "integrity" "sha512-tq9IyKm1JzNRpM7V7LALxXiAyTlV5eZwoqntpnRIbnqDsIyNlnPkWQEoX77f40pzcUuAH4CiHRDxW5VskPlgtQ=="
   "resolved" "https://registry.npmjs.org/@types/metro-config/-/metro-config-0.76.3.tgz"

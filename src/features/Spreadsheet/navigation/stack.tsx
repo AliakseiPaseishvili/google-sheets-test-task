@@ -25,6 +25,8 @@ export const SpreadSheetStack = () => (
         title: route.params.title,
       })}
     />
-    <Stack.Screen name={ROUTES.SPREADSHEETS.PIE} component={CulumnPieScreen} />
+    <Stack.Screen name={ROUTES.SPREADSHEETS.PIE} component={CulumnPieScreen} options={{
+      title: TRANSLATIONS.PIE_CHART,
+    }} />
   </Stack.Navigator>
 );
