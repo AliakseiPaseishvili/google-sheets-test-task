@@ -10,6 +10,9 @@ const mapStateToProps = (title: string) => (store: RootState) => {
   return sheet[title] ?? {};
 };
 
+/*
+  using setInterval is only working solution for getting data from google-spreadsheets, as it doesn't support websockets. Google app script doesn't support it too.
+*/
 export const useGetSheetData = (sheetId: string | undefined, title: string) => {
   const { values, arrayLength } = useSelector(mapStateToProps(title), shallowEqual);
   const dispatch = useDispatch();
