@@ -42,6 +42,7 @@ export const useGetSheetData = (sheetId: string | undefined, title: string) => {
       }
     };
 
+    getSheetData();
     const interval = setInterval(async () => getSheetData(), 10000);
     
     return () => clearInterval(interval);
