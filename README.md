@@ -2,6 +2,7 @@
 
 ## Description.
 This is simple react-native application that gets informataion from sheets in google spreadsheets with real time updates and pie charts for each column of selected sheet.
+Link with video example: https://youtu.be/wjp4TvP_mxw
 
 # Installation and running.
 
@@ -108,6 +109,8 @@ For rendering data with better performance we are using `FlatList`, we also know
 
 For having real-time updates I used the simpliest solution:
 We just added setInterval for our request with getting infomration about sheet data. Why there is no websocket? Because google-spreadsheets doesn't have the api for it. I spent time on investigation about it and thought that we can use App Google script and onEdit method, but it is just impossible to do it with this functionality. 
+
+Is corrent funcionality is well optimized? No, it is not. We are limitted by google sheets API.
 
 ```
 export const useGetSheetData = (sheetId: string | undefined, title: string) => {
