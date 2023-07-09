@@ -5,6 +5,8 @@ This is simple react-native application that gets informataion from sheets in go
 
 # Installation and running.
 
+Before installation we need to create google api key.
+
 1. Download the repository.
 2. write `npm i` in console in root folder.
 3. add google api key to `API_KEY` in `.env` file in root folder.
@@ -15,29 +17,30 @@ This is simple react-native application that gets informataion from sheets in go
 
 # Project structure.
 
-- src
--- components
---- [componentName]
----- [componentName].tsx
----- index.tsx
--- constants
--- endpoints
--- helpers
--- types
--- store
---- slices
----- [name].slice.tsx
---- index.ts
--- features
---- components
---- hooks
---- navigation
----- screens
----- stack.tsx
----- types.ts
---- constants.ts
---- index.ts
--- App.ts
+* src
+* * components
+* * * [componentName]
+* * * * [componentName].tsx
+* * * * index.tsx
+* * constants
+* * endpoints
+* * helpers
+* * types
+* * store
+* * * slices
+* * * * [name].slice.tsx
+* * * index.ts
+* * features
+* * * components
+* * * hooks
+* * * navigation
+* * * * screens
+* * * * * [screenName].screen.tsx
+* * * * stack.tsx
+* * * * types.ts
+* * * constants.ts
+* * * index.ts
+* * App.ts
 
 ## Explanantion
 1. components in src folder contain all common and shared components.
@@ -135,3 +138,9 @@ export const useGetSheetData = (sheetId: string | undefined, title: string) => {
     return () => clearInterval(interval);
   }, [sheetId]);
 ```
+
+For showing pie chart I used `victory-native` library. It uses svg inside.
+
+For responsive size I used `react-native-pixel-perfect`.
+
+For data managment I used `redux-toolkit`. As we need to draw pie chart and it is placed on another screen from sheet, I thought that it will be good idea to store sheet information in redux reducers.
