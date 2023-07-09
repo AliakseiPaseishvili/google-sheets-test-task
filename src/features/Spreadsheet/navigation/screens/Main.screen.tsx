@@ -7,11 +7,11 @@ import { ROUTES } from "../../../../constants/routes";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import { useGetSpreadsheetData } from "../../hooks/useGetSpreadsheetData";
+import { Placeholder } from "../../../../components/Placeholder";
 
 export const MainScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_MAIN">
 > = ({ navigation }) => {
-
   const { spreadsheetId, sheets } = useGetSpreadsheetData();
 
   return (
@@ -35,6 +35,7 @@ export const MainScreen: FC<
         />
       )}
       ListEmptyComponent={() => !sheets.length && <ActivityIndicator />}
+      ListFooterComponent={<Placeholder />}
     />
   );
 };

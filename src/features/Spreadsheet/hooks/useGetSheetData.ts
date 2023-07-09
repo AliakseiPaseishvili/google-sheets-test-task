@@ -38,7 +38,10 @@ export const useGetSheetData = (sheetId: string | undefined, title: string) => {
         console.error(error);
       }
     };
-    getSheetData();
+
+    const interval = setInterval(async () => getSheetData(), 10000);
+    
+    return () => clearInterval(interval);
   }, [sheetId]);
 
   return { sheetData: values, arrayLength };

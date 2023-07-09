@@ -2,11 +2,12 @@ import React, { FC, useMemo } from "react";
 import { Row as RNRow } from "react-native-reanimated-table";
 import { RStyleSheet } from "../../../components/Stylesheet";
 import { COLORS } from "../../../constants/colors";
+import { ROW_HEIGHT } from "../constants";
 
 export type RowProps = {
   data: string[];
   arrayLength: number;
-  widthArr: number[],
+  widthArr: number[];
 };
 
 export const Row: FC<RowProps> = ({ data, arrayLength, widthArr }) => {
@@ -31,7 +32,7 @@ export const Row: FC<RowProps> = ({ data, arrayLength, widthArr }) => {
 
 const styles = RStyleSheet.create({
   rowStyle: {
-    height: 40,
+    height: ROW_HEIGHT,
   },
   textStyle: {
     textAlign: "center",

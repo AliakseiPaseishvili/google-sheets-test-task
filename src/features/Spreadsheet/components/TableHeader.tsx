@@ -9,6 +9,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ROUTES } from "../../../constants/routes";
 import { RootStackParamList } from "../navigation/types";
+import { ROW_HEIGHT } from "../constants";
 
 interface TableHeaderProps {
   title: string;
@@ -68,7 +69,7 @@ const styles = RStyleSheet.create({
     flexDirection: "row",
   },
   cell: {
-    height: 40,
+    height: ROW_HEIGHT,
     width: 80,
     borderRightWidth: 1,
     borderColor: COLORS.border,

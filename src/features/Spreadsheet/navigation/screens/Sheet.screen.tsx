@@ -2,12 +2,18 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Row } from "../../components/Row";
 import React, { FC, useMemo } from "react";
 import { RootStackParamList } from "../types";
-import { ActivityIndicator, Dimensions, FlatList, ScrollView } from "react-native";
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import { RStyleSheet, px2dp } from "../../../../components/Stylesheet";
 import { COLORS } from "../../../../constants/colors";
-
 import { useGetSheetData } from "../../hooks/useGetSheetData";
 import { TableHeader } from "../../components/TableHeader";
+import { ROW_HEIGHT } from "../../constants";
+import { Placeholder } from "../../../../components/Placeholder";
 
 export const SheetScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_SHEET">
@@ -16,16 +22,20 @@ export const SheetScreen: FC<
     params: { title, sheetId },
   },
 }) => {
-
   const { sheetData, arrayLength } = useGetSheetData(sheetId, title);
 
-  const widthArr = useMemo(() => new Array(arrayLength).fill(px2dp(80)) ,[arrayLength]);
+  const widthArr = useMemo(
+    () => new Array(arrayLength).fill(px2dp(80)),
+    [arrayLength]
+  );
 
   return (
     <ScrollView horizontal={true} style={styles.wrapper}>
       <FlatList
         style={styles.flatList}
         data={sheetData}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         ListHeaderComponent={<TableHeader title={title} />}
         keyExtractor={(item, index) =>
           item.reduce(
@@ -33,9 +43,17 @@ export const SheetScreen: FC<
             ""
           ) + index
         }
-        renderItem={({ item }) => <Row widthArr={widthArr} data={item} arrayLength={arrayLength} />}
+        renderItem={({ item }) => (
+          <Row widthArr={widthArr} data={item} arrayLength={arrayLength} />
+        )}
         ListEmptyComponent={() => !sheetData && <ActivityIndicator />}
         initialNumToRender={18}
+        getItemLayout={(data, index) => ({
+          length: px2dp(ROW_HEIGHT),
+          offset: px2dp(ROW_HEIGHT) * index,
+          index,
+        })}
+        ListFooterComponent={<Placeholder />}
       />
     </ScrollView>
   );
@@ -48,6 +66,6 @@ const styles = RStyleSheet.create({
   },
   flatList: {
     flex: 1,
-    minWidth: Dimensions.get('window').width,
+    minWidth: Dimensions.get("window").width,
   },
 });
