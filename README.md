@@ -2,7 +2,9 @@
 
 ## Description.
 This is simple react-native application that gets informataion from sheets in google spreadsheets with real time updates and pie charts for each column of selected sheet.
+
 Link with video example: https://www.youtube.com/watch?v=o2RFdhnMXBM
+
 Link with spreadsheets: https://docs.google.com/spreadsheets/d/17FXJ_St91eMQ7Fc3zO4YMMhfzixG5g2wq0a3Mk77XsE/edit#gid=0
 
 # Installation and running.
