@@ -2,18 +2,14 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Row } from "../../components/Row";
 import React, { FC, useMemo } from "react";
 import { RootStackParamList } from "../types";
-import {
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
-  ScrollView,
-} from "react-native";
+import { Dimensions, FlatList, ScrollView } from "react-native";
 import { RStyleSheet, px2dp } from "../../../../components/Stylesheet";
 import { COLORS } from "../../../../constants/colors";
 import { useGetSheetData } from "../../hooks/useGetSheetData";
 import { TableHeader } from "../../components/TableHeader";
 import { ROW_HEIGHT } from "../../constants";
 import { Placeholder } from "../../../../components/Placeholder";
+import { Loader } from "../../../../components/Loader";
 
 export const SheetScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_SHEET">
@@ -46,7 +42,7 @@ export const SheetScreen: FC<
         renderItem={({ item }) => (
           <Row widthArr={widthArr} data={item} arrayLength={arrayLength} />
         )}
-        ListEmptyComponent={() => !sheetData && <ActivityIndicator />}
+        ListEmptyComponent={() => !sheetData && <Loader />}
         initialNumToRender={18}
         getItemLayout={(data, index) => ({
           length: px2dp(ROW_HEIGHT),

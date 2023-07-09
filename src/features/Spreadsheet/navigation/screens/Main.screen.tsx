@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ActivityIndicator, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { ListItem } from "../../../../components/ListItem";
 import { RStyleSheet } from "../../../../components/Stylesheet";
 import { COLORS } from "../../../../constants/colors";
@@ -8,6 +8,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import { useGetSpreadsheetData } from "../../hooks/useGetSpreadsheetData";
 import { Placeholder } from "../../../../components/Placeholder";
+import { Loader } from "../../../../components/Loader";
 
 export const MainScreen: FC<
   NativeStackScreenProps<RootStackParamList, "SPREADSHEETS_MAIN">
@@ -34,7 +35,7 @@ export const MainScreen: FC<
           }
         />
       )}
-      ListEmptyComponent={() => !sheets.length && <ActivityIndicator />}
+      ListEmptyComponent={() => !sheets.length && <Loader />}
       ListFooterComponent={<Placeholder />}
     />
   );
