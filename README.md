@@ -6,10 +6,16 @@ This is simple react-native application that gets informataion from sheets in go
 # Installation and running.
 
 Before installation we need to create google api key.
+1. Open: https://console.cloud.google.com/
+2. Create new project by pressing button in header of the page. Give the name to the project and write organization where you work. you can also see the ID_OF_PROJECT.
+3. After creation you need to go to this page https://console.cloud.google.com/apis/library?project=ID_OF_PROJECT. It will open library page. Here you need to activate `google sheets api`.
+4. After activation of google sheets api. you need to open this page.
+https://console.cloud.google.com/apis/credentials?project=ID_OF_PROJECT. Here you press on '+ create credentials' -> API Key.
 
+Installation:
 1. Download the repository.
 2. write `npm i` in console in root folder.
-3. add google api key to `API_KEY` in `.env` file in root folder.
+3. add google api key to `API_KEY` in `.env` file in root folder. Create`.env` file if it doesn't exist  .
 3. Go to ios folder with command `pod install`. 
    1. For android will be fine to run 'npx react-native run-android' in root folder.
 4. Open Xcode and open `GoogleSheetsTask.xcworkspace` in it.
