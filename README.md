@@ -7,6 +7,8 @@ Link with video example: https://www.youtube.com/watch?v=o2RFdhnMXBM
 
 Link with spreadsheets: https://docs.google.com/spreadsheets/d/17FXJ_St91eMQ7Fc3zO4YMMhfzixG5g2wq0a3Mk77XsE/edit#gid=0
 
+If you want to see this small app to work with websocket ,then please open this link: https://github.com/AliakseiPaseishvili/google-sheets-test-task-websocket
+
 # Installation and running.
 
 Before installation we need to create google api key.
